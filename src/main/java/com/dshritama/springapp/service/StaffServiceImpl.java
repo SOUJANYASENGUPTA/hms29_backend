@@ -43,7 +43,7 @@ public class StaffServiceImpl implements StaffService {
         existingStaff.setAddress(updatedStaff.getAddress());
         existingStaff.setPhone(updatedStaff.getPhone());
         existingStaff.setEmail(updatedStaff.getEmail());
-        existingStaff.setJob_title(updatedStaff.getJob_title());
+        existingStaff.setJobTitle(updatedStaff.getJobTitle());
         existingStaff.setSalary(updatedStaff.getSalary());
         existingStaff.setBenefits(updatedStaff.getBenefits());
         // Set other attributes here
@@ -55,6 +55,22 @@ public class StaffServiceImpl implements StaffService {
     public void deleteStaff(Long id) {
         staffRepository.deleteById(id);
     }
+
+	@Override
+	public Staff getDoctorById(Long id) {
+		Staff doctor= staffRepository.findByJobTitle("Doctor");
+		if(doctor!=null) {
+			if(doctor.getId()==id) {
+				return doctor;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+	}
 
    
 

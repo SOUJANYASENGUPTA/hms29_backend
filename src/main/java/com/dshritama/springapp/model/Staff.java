@@ -18,32 +18,41 @@ public class Staff {
     private String address;
     private String phone;
     private String email;
-    private String job_title;
+    private String jobTitle;
     private double salary;
     private String benefits;
 
     // Constructors, getters, and setters
 
 
-
-
-public Staff(Long id, String name, int age, String gender, String address, String phone, String email, String job_title,
-        double salary, String benefits) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
-    this.address = address;
-    this.phone = phone;
-    this.email = email;
-    this.job_title = job_title;
-    this.salary = salary;
-    this.benefits = benefits;
+public Staff() {
+	super();
+	// TODO Auto-generated constructor stub
 }
+
+
+
+public Staff(Long id, String name, int age, String gender, String address, String phone, String email,
+			String jobTitle, double salary, String benefits) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.setJobTitle(jobTitle);
+		this.salary = salary;
+		this.benefits = benefits;
+	}
+
+
 
 public Long getId() {
     return id;
 }
+
 
 public void setId(Long id) {
     this.id = id;
@@ -100,17 +109,10 @@ public void setEmail(String email) {
 @Override
 public String toString() {
     return "Staff [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
-            + ", phone=" + phone + ", email=" + email + ", job_title=" + job_title + ", salary=" + salary
+            + ", phone=" + phone + ", email=" + email + ", job_title=" + jobTitle + ", salary=" + salary
             + ", benefits=" + benefits + "]";
 }
 
-public String getJob_title() {
-    return job_title;
-}
-
-public void setJob_title(String job_title) {
-    this.job_title = job_title;
-}
 
 public double getSalary() {
     return salary;
@@ -127,6 +129,21 @@ public String getBenefits() {
 public void setBenefits(String benefits) {
     this.benefits = benefits;
 }
+
+
+
+public String getJobTitle() {
+	return jobTitle;
+}
+
+
+
+public void setJobTitle(String jobTitle) {
+	this.jobTitle = jobTitle;
+}
+
+
+
 
 
 }

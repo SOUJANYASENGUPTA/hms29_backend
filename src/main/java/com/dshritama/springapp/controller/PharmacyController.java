@@ -62,9 +62,9 @@ public class PharmacyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePharmacy(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deletePharmacy(@PathVariable("id") Long id) {
         pharmacyService.deletePharmacy(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return  ResponseEntity.ok("Deleted");
     }
 
     @GetMapping("/{id}/patient")
