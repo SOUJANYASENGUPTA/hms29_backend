@@ -31,19 +31,19 @@ public class MedicalRecordServiceImpl implements MedicalRecordService{
     public MedicalRecord createMedicalRecord(MedicalRecord medicalRecord) {
         Patient patient = patientRepository.findById(medicalRecord.getPatientId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
-        Staff doctor = staffRepository.findByJobTitle("Doctor");
-        if (doctor == null) {
-            throw new IllegalStateException("Doctor not found");
+        Staff doctor = staffRepository.findById(medicalRecord.getDoctorId()).orElse(null);
+        if(doctor!=null && doctor.getJobTitle().toLowerCase().equals("doctor")) {
+        	MedicalRecord newMedicalRecord = new MedicalRecord();
+            newMedicalRecord.setPatientId(patient.getId());
+            newMedicalRecord.setDoctorId(doctor.getId());
+            newMedicalRecord.setDate(medicalRecord.getDate());
+            newMedicalRecord.setDiagnosis(medicalRecord.getDiagnosis());
+            newMedicalRecord.setPrescription(medicalRecord.getPrescription());
+            newMedicalRecord.setNotes(medicalRecord.getNotes());
+            medicalRecordRepository.save(newMedicalRecord);
+            return new MedicalRecord(newMedicalRecord.getId(),newMedicalRecord.getDate(),newMedicalRecord.getDiagnosis(),newMedicalRecord.getPrescription(),newMedicalRecord.getNotes(),newMedicalRecord.getPatientId(),newMedicalRecord.getDoctorId());
         }
-        MedicalRecord newMedicalRecord = new MedicalRecord();
-        newMedicalRecord.setPatientId(patient.getId());
-        newMedicalRecord.setDoctorId(doctor.getId());
-        newMedicalRecord.setDate(medicalRecord.getDate());
-        newMedicalRecord.setDiagnosis(medicalRecord.getDiagnosis());
-        newMedicalRecord.setPrescription(medicalRecord.getPrescription());
-        newMedicalRecord.setNotes(medicalRecord.getNotes());
-        medicalRecordRepository.save(newMedicalRecord);
-        return new MedicalRecord(newMedicalRecord.getId(),newMedicalRecord.getDate(),newMedicalRecord.getDiagnosis(),newMedicalRecord.getPrescription(),newMedicalRecord.getNotes(),newMedicalRecord.getPatientId(),newMedicalRecord.getDoctorId());
+        else  throw new IllegalStateException("Doctor not found");
     }
 
     @Override

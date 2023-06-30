@@ -1,32 +1,23 @@
 package com.dshritama.springapp.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dshritama.springapp.model.Staff;
 import com.dshritama.springapp.repository.StaffRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
-@Transactional
 public class StaffServiceImpl implements StaffService {
-    private final StaffRepository staffRepository;
+	@Autowired
+    private StaffRepository staffRepository;
 
-    public StaffServiceImpl(StaffRepository staffRepository) {
-        this.staffRepository = staffRepository;
-    }
+    
 
     @Override
     public List<Staff> getAllStaff() {
         return staffRepository.findAll();
-    }
-
-    @Override
-    public Optional<Staff> getStaffById(Long id) {
-        return staffRepository.findById(id);
     }
 
     @Override
@@ -35,18 +26,19 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff updateStaff(Long id, Staff updatedStaff) {
-        Staff existingStaff = staffRepository.findById(id).orElseThrow();
-        existingStaff.setName(updatedStaff.getName());
-        existingStaff.setAge(updatedStaff.getAge());
-        existingStaff.setGender(updatedStaff.getGender());
-        existingStaff.setAddress(updatedStaff.getAddress());
-        existingStaff.setPhone(updatedStaff.getPhone());
-        existingStaff.setEmail(updatedStaff.getEmail());
-        existingStaff.setJobTitle(updatedStaff.getJobTitle());
-        existingStaff.setSalary(updatedStaff.getSalary());
-        existingStaff.setBenefits(updatedStaff.getBenefits());
-        // Set other attributes here
+    public Staff updateStaff(Staff staff) {
+        Staff existingStaff = staffRepository.findById(staff.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid staff ID"));
+
+        existingStaff.setName(staff.getName());
+        existingStaff.setAge(staff.getAge());
+        existingStaff.setGender(staff.getGender());
+        existingStaff.setAddress(staff.getAddress());
+        existingStaff.setPhone(staff.getPhone());
+        existingStaff.setJobTitle(staff.getJobTitle());
+        existingStaff.setEmail(staff.getEmail());
+        existingStaff.setSalary(staff.getSalary());
+        existingStaff.setBenefits(staff.getBenefits());
 
         return staffRepository.save(existingStaff);
     }
@@ -57,23 +49,18 @@ public class StaffServiceImpl implements StaffService {
     }
 
 	@Override
-	public Staff getDoctorById(Long id) {
-		Staff doctor= staffRepository.findByJobTitle("Doctor");
-		if(doctor!=null) {
-			if(doctor.getId()==id) {
-				return doctor;
-			}
-			else {
-				return null;
-			}
-		}
-		else {
-			return null;
-		}
+	public Staff getStaffById(Long id) {
+		return staffRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Doctor not exist with id :"+id));
 	}
 
-   
-
-    
+	@Override
+	public Staff getDoctorById(Long id){
+		Staff doctor=staffRepository.findById(id).orElse(null);
+		if(doctor!=null) {
+			if(doctor.getJobTitle().toLowerCase().equals("doctor")) {
+				return doctor;
+			}
+		}
+		return null;
+	}
 }
-
