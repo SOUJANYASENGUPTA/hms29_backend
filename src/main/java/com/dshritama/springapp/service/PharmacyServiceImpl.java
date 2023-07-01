@@ -2,17 +2,16 @@ package com.dshritama.springapp.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dshritama.springapp.model.Pharmacy;
 import com.dshritama.springapp.model.Patient;
-import com.dshritama.springapp.repository.PharmacyRepository;
+import com.dshritama.springapp.model.Pharmacy;
 import com.dshritama.springapp.repository.PatientRepository;
+import com.dshritama.springapp.repository.PharmacyRepository;
 
 @Service
-public class PharmacyServiceImpl implements PharmacyService {
+public class PharmacyServiceImpl implements PharmacyService{
     @Autowired
     private final PharmacyRepository pharmacyRepository;
     private final PatientRepository patientRepository;
@@ -65,4 +64,4 @@ public class PharmacyServiceImpl implements PharmacyService {
         }
         return null;
     }
-}  
+}
