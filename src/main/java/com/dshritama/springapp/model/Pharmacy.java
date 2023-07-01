@@ -2,38 +2,58 @@ package com.dshritama.springapp.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.FetchType;
-@Entity
 
+@Entity
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   
+    @Column(name = "patientId")
     private Long patientId;
 
-    
+    @Column(name = "medicationName")
     private String medicationName;
 
     private String dosage;
 
-    
+    @Column(name = "refillDate")
     private Date refillDate;
 
-    
+    @Column(name = "prescriptionNumber")
     private String prescriptionNumber;
 
-    // Getters and Setters
+    public Pharmacy() {
+    }
+
+    public Pharmacy(Long id, Long patientId, String medicationName, String dosage, Date refillDate,
+            String prescriptionNumber) {
+        this.id = id;
+        this.patientId = patientId;
+        this.medicationName = medicationName;
+        this.dosage = dosage;
+        this.refillDate = refillDate;
+        this.prescriptionNumber = prescriptionNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Pharmacy [id=" + id + ", patientId=" + patientId + ", medicationName=" + medicationName + ", dosage="
+                + dosage + ", refillDate=" + refillDate + ", prescriptionNumber=" + prescriptionNumber + "]";
+    }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -41,7 +61,7 @@ public class Pharmacy {
     }
 
     public Long getPatientId() {
-        return this.patientId;
+        return patientId;
     }
 
     public void setPatientId(Long patientId) {
@@ -49,7 +69,7 @@ public class Pharmacy {
     }
 
     public String getMedicationName() {
-        return this.medicationName;
+        return medicationName;
     }
 
     public void setMedicationName(String medicationName) {
@@ -57,7 +77,7 @@ public class Pharmacy {
     }
 
     public String getDosage() {
-        return this.dosage;
+        return dosage;
     }
 
     public void setDosage(String dosage) {
@@ -65,7 +85,7 @@ public class Pharmacy {
     }
 
     public Date getRefillDate() {
-        return this.refillDate;
+        return refillDate;
     }
 
     public void setRefillDate(Date refillDate) {
@@ -73,15 +93,16 @@ public class Pharmacy {
     }
 
     public String getPrescriptionNumber() {
-        return this.prescriptionNumber;
+        return prescriptionNumber;
     }
 
     public void setPrescriptionNumber(String prescriptionNumber) {
         this.prescriptionNumber = prescriptionNumber;
     }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientId", insertable = false, updatable = false)
+    @JsonIgnoreProperties("hibernateLazyInitializer")
     private Patient patient;
 
     public Patient getPatient() {
@@ -91,4 +112,5 @@ public class Pharmacy {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+
 }
