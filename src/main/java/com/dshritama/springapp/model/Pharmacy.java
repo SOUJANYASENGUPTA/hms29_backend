@@ -3,6 +3,8 @@ package com.dshritama.springapp.model;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,24 +16,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
+@JsonPropertyOrder({"id", "medication_name", "dosage", "refill_date", "prescription_number", "patient_id"})
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
-    @Column(name = "patientId")
+    @JsonProperty("patient_id")
     private Long patientId;
 
-    @Column(name = "medicationName")
+    @JsonProperty("medication_name")
     private String medicationName;
 
+    @JsonProperty("dosage")
     private String dosage;
 
-    @Column(name = "refillDate")
+    @JsonProperty("refill_date")
     private Date refillDate;
 
-    @Column(name = "prescriptionNumber")
+    @JsonProperty("prescription_number")
     private String prescriptionNumber;
+
 
     public Pharmacy() {
     }
@@ -39,17 +45,17 @@ public class Pharmacy {
     public Pharmacy(Long id, Long patientId, String medicationName, String dosage, Date refillDate,
             String prescriptionNumber) {
         this.id = id;
-        this.patientId = patientId;
         this.medicationName = medicationName;
         this.dosage = dosage;
         this.refillDate = refillDate;
         this.prescriptionNumber = prescriptionNumber;
+        
     }
 
     @Override
     public String toString() {
-        return "Pharmacy [id=" + id + ", patientId=" + patientId + ", medicationName=" + medicationName + ", dosage="
-                + dosage + ", refillDate=" + refillDate + ", prescriptionNumber=" + prescriptionNumber + "]";
+        return "Pharmacy [id=" + id  + ", medicationName=" + medicationName + ", dosage="
+                + dosage + ", refillDate=" + refillDate + ", prescriptionNumber=" + prescriptionNumber + ", patientId=" + patientId + "]";
     }
 
     public Long getId() {
@@ -105,12 +111,5 @@ public class Pharmacy {
     @JsonIgnoreProperties("hibernateLazyInitializer")
     private Patient patient;
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
 
 }

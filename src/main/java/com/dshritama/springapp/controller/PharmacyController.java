@@ -52,9 +52,9 @@ public class PharmacyController {
         return new ResponseEntity<>(createdPharmacy, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Pharmacy> updatePharmacy(@PathVariable("id") Long id, @RequestBody Pharmacy updatedPharmacy) {
-        Pharmacy pharmacy = pharmacyService.updatePharmacy(id, updatedPharmacy);
+    @PutMapping
+    public ResponseEntity<Pharmacy> updatePharmacy(@RequestBody Pharmacy updatedPharmacy) {
+        Pharmacy pharmacy = pharmacyService.updatePharmacy(updatedPharmacy);
         if (pharmacy != null) {
             return new ResponseEntity<>(pharmacy, HttpStatus.OK);
         }
@@ -67,12 +67,5 @@ public class PharmacyController {
         return  ResponseEntity.ok("Deleted");
     }
 
-    @GetMapping("/{id}/patient")
-    public ResponseEntity<Patient> getPatientByPharmacyId(@PathVariable("id") Long id) {
-        Patient patient = pharmacyService.getPatientByPharmacyId(id);
-        if (patient != null) {
-            return new ResponseEntity<>(patient, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    
 }

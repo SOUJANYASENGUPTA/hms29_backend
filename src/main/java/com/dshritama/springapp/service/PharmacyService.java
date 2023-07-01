@@ -10,9 +10,9 @@ public interface PharmacyService {
 
     Pharmacy createPharmacy(Pharmacy pharmacy);
 
-    Pharmacy updatePharmacy(Long id, Pharmacy updatedPharmacy);
+    Pharmacy updatePharmacy(Pharmacy updatedPharmacy);
 
     void deletePharmacy(Long id);
 
-    Patient getPatientByPharmacyId(Long id);
+    //Patient getPatientByPharmacyId(Long id);
 }

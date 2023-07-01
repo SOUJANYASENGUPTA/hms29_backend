@@ -37,17 +37,18 @@ public class PharmacyServiceImpl implements PharmacyService{
     }
 
     @Override
-    public Pharmacy updatePharmacy(Long id, Pharmacy updatedPharmacy) {
-        Pharmacy pharmacy = pharmacyRepository.findById(id).orElse(null);
-        if (pharmacy != null) {
-            pharmacy.setPatientId(updatedPharmacy.getPatientId());
+    public Pharmacy updatePharmacy(Pharmacy updatedPharmacy) {
+        Pharmacy pharmacy = pharmacyRepository.findById(updatedPharmacy.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid pharmacy ID"));;
+       
+           
             pharmacy.setMedicationName(updatedPharmacy.getMedicationName());
             pharmacy.setDosage(updatedPharmacy.getDosage());
             pharmacy.setRefillDate(updatedPharmacy.getRefillDate());
             pharmacy.setPrescriptionNumber(updatedPharmacy.getPrescriptionNumber());
+            pharmacy.setPatientId(updatedPharmacy.getPatientId());
             return pharmacyRepository.save(pharmacy);
-        }
-        return null;
+        
+    
     }
 
     @Override
@@ -55,13 +56,4 @@ public class PharmacyServiceImpl implements PharmacyService{
         pharmacyRepository.deleteById(id);
     }
  
-   @Override
-    public Patient getPatientByPharmacyId(Long id) {
-        Pharmacy pharmacy = pharmacyRepository.findById(id).orElse(null);
-        if (pharmacy != null) {
-            Long patientId = pharmacy.getPatientId();
-            return patientRepository.findById(patientId).orElse(null);
-        }
-        return null;
-    }
 }
