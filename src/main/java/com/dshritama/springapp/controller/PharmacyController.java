@@ -38,12 +38,10 @@ public class PharmacyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable("id") Long id) {
+    public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable Long id) {
         Pharmacy pharmacy = pharmacyService.getPharmacyById(id);
-        if (pharmacy != null) {
             return new ResponseEntity<>(pharmacy, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        
     }
 
     @PostMapping
