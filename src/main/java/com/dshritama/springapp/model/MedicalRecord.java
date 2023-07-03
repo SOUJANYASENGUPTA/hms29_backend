@@ -1,5 +1,8 @@
 package com.dshritama.springapp.model;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,9 +12,11 @@ public class MedicalRecord {
     private Long id;
 
     @Column(name = "patient_id")
+    @JsonProperty("patient_id")
     private Long patientId;
 
     @Column(name = "doctor_id")
+    @JsonProperty("doctor_id")
     private Long doctorId;
 
     private LocalDate date;
