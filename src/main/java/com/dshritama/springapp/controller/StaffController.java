@@ -45,8 +45,8 @@ public class StaffController {
         staffService.deleteStaff(id);
         return "Deleted Successfully";
     }
-    @GetMapping("/doctor/{id}")
-    public Staff getDoctorById(@PathVariable Long id) {
-    	return staffService.getDoctorById(id);
+    @GetMapping("/{id}")
+    public Staff getStaffById(@PathVariable Long id) {
+    	return staffService.getStaffById(id);
     }
 }

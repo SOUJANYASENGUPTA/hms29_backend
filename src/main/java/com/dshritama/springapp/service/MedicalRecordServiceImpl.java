@@ -31,8 +31,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService{
     public MedicalRecord createMedicalRecord(MedicalRecord medicalRecord) {
         Patient patient = patientRepository.findById(medicalRecord.getPatientId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
-        Staff doctor = staffRepository.findById(medicalRecord.getDoctorId()).orElse(null);
-        if(doctor!=null && doctor.getJobTitle().toLowerCase().equals("doctor")) {
+        Staff doctor = staffRepository.findById(medicalRecord.getDoctorId()).orElseThrow(() -> new IllegalArgumentException("Invalid Doctor ID"));;
+        if(doctor!=null && doctor.getJobTitle().equalsIgnoreCase("doctor")) {
         	MedicalRecord newMedicalRecord = new MedicalRecord();
             newMedicalRecord.setPatientId(patient.getId());
             newMedicalRecord.setDoctorId(doctor.getId());

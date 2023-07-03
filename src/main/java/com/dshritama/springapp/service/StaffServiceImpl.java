@@ -50,17 +50,7 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public Staff getStaffById(Long id) {
-		return staffRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Doctor not exist with id :"+id));
+		return staffRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Staff not exist with id :"+id));
 	}
 
-	@Override
-	public Staff getDoctorById(Long id){
-		Staff doctor=staffRepository.findById(id).orElse(null);
-		if(doctor!=null) {
-			if(doctor.getJobTitle().toLowerCase().equals("doctor")) {
-				return doctor;
-			}
-		}
-		return null;
-	}
 }
