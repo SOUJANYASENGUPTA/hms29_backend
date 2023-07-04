@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dshritama.springapp.model.MedicalRecord;
 import com.dshritama.springapp.model.Patient;
 import com.dshritama.springapp.model.Pharmacy;
+import com.dshritama.springapp.repository.MedicalRecordRepository;
 import com.dshritama.springapp.repository.PatientRepository;
 import com.dshritama.springapp.repository.PharmacyRepository;
 
@@ -19,6 +21,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PharmacyRepository pharmacyRepository;
+
+    @Autowired
+    private MedicalRecordRepository medicalrecordRepository;
 
     @Override
     public List<Patient> getAllPatients() {
@@ -36,6 +41,10 @@ public class PatientServiceImpl implements PatientService {
     public void deletePatient(Long id) {
         List<Pharmacy> pharmacyList = pharmacyRepository.findByPatientId(id);
         pharmacyRepository.deleteAll(pharmacyList);
+
+        List<MedicalRecord> medicalRecords = medicalrecordRepository.findByPatientId(id);
+        medicalrecordRepository.deleteAll(medicalRecords);
+        
         patientRepository.deleteById(id);
     }
 
