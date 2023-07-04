@@ -7,4 +7,5 @@ import com.dshritama.springapp.model.Pharmacy;
 
 @Repository
 public interface PharmacyRepository extends JpaRepository<Pharmacy, Long> {
+  List<Pharmacy> findByPatientId(Long patientId);
 }
