@@ -119,13 +119,5 @@ public class Patient {
         this.treatmentPlan = treatmentPlan;
     }
 
-    /* public boolean isPresent() {
-        return false;
-    }
-
-    public Object get() {
-        return null;
-    } */
-
 }
 
