@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dshritama.springapp.model.Patient;
+import com.dshritama.springapp.model.Pharmacy;
 import com.dshritama.springapp.repository.PatientRepository;
+import com.dshritama.springapp.repository.PharmacyRepository;
 
 @Service
 public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private PharmacyRepository pharmacyRepository;
 
     @Override
     public List<Patient> getAllPatients() {
@@ -29,13 +34,10 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void deletePatient(Long id) {
+        List<Pharmacy> pharmacyList = pharmacyRepository.findByPatientId(id);
+        pharmacyRepository.deleteAll(pharmacyList);
         patientRepository.deleteById(id);
     }
-
-    /* @Override
-    public void updatePatient(Patient patient) {
-        patientRepository.save(patient);
-    } */
 
     @Override
     public Patient createPatient(Patient patient) {
