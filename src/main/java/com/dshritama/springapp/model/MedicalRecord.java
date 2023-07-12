@@ -1,17 +1,9 @@
 package com.dshritama.springapp.model;
-
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class MedicalRecord {
@@ -34,18 +26,16 @@ public class MedicalRecord {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", insertable = false, updatable = false)
-    @JsonIgnoreProperties("hibernateLazyInitializer")
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
-    @JsonIgnoreProperties("hibernateLazyInitializer")
     private Staff doctor;
 
     public MedicalRecord() {
     }
 
-    public MedicalRecord(Long id, Long patientId, Long doctorId, LocalDate date, String diagnosis, String prescription, String notes){
+    public MedicalRecord(Long id, LocalDate date, String diagnosis, String prescription, String notes,Long patientId, Long doctorId){
         this.id = id;
         this.patientId = patientId;
         this.doctorId = doctorId;

@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.dshritama.springapp.model.Inventory;
 import com.dshritama.springapp.service.InventoryService;
 
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/inventory")
 public class InventoryController {
+
     @Autowired
     private InventoryService inventoryService;
 

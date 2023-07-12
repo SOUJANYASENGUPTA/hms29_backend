@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.dshritama.springapp.model.Patient;
 
 @Repository
+
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 }

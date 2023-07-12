@@ -17,9 +17,9 @@ import com.dshritama.springapp.model.Staff;
 import com.dshritama.springapp.service.StaffService;
 
 
-@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/staff")
+@CrossOrigin(origins="http://localhost:3000")
 public class StaffController {
     private final StaffService staffService;
 
