@@ -13,6 +13,8 @@ import com.dshritama.springapp.repository.MedicalRecordRepository;
 import com.dshritama.springapp.repository.PatientRepository;
 import com.dshritama.springapp.repository.StaffRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class MedicalRecordService {
     @Autowired

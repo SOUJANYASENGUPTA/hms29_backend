@@ -35,7 +35,7 @@ public class MedicalRecord {
     public MedicalRecord() {
     }
 
-    public MedicalRecord(Long id, LocalDate date, String diagnosis, String prescription, String notes,Long patientId, Long doctorId){
+    public MedicalRecord(Long id, Long patientId, Long doctorId, LocalDate date, String diagnosis, String prescription, String notes){
         this.id = id;
         this.patientId = patientId;
         this.doctorId = doctorId;
